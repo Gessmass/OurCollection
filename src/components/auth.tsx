@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useState } from "react";
 import styled from "@emotion/styled";
 import { auth, googleProvider } from "../config/firebase_config";
 import {
