@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import styled from "@emotion/styled";
 import { ref, uploadBytes } from "firebase/storage";
+import React from "react";
 
 interface CarList {
   id: string;
