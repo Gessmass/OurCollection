@@ -6,7 +6,6 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import React from "react";
 
 const MainDiv = styled.div`
   border: 2px solid black;

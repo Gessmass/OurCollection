@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import { Auth } from "../src/components/auth";
+import { Auth } from "./components/auth";
 import { db, auth, storage } from "./config/firebase_config";
 import {
   getDocs,
