@@ -26,7 +26,7 @@ interface CarList {
 const CreateNewCar = styled.div`
   border: 2px solid red;
   height: 200px;
-  width: 50%;
+  /* width: 50%; */
 `;
 
 const InputNewCar = styled.input`
