@@ -41,6 +41,7 @@ const App: FC = () => {
   const [newCarYear, setNewCarYear] = useState<number | null>(null);
   const [updatedCarYear, setUpdatedCarYear] = useState<number | null>(null);
   const [uploadingFile, setUploadingFile] = useState<File | null>(null);
+  const [connected, setConnected] = useState<boolean>(false);
 
   const carCollectionRef = collection(db, "cars");
 
@@ -52,11 +53,12 @@ const App: FC = () => {
 
       //filtre la réponse pour garder seulement le contenu de la database et enlever les éléments annexes de la query
       const filteredData = data.docs.map((doc) => ({
-        ...doc.data(),
+        ...(doc.data() as CarList),
         id: doc.id,
       }));
 
       setCarList(filteredData);
+
       console.log(filteredData);
     } catch (err) {
       console.error(err);
@@ -112,9 +114,16 @@ const App: FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (auth.currentUser) {
+      setConnected(true);
+    }
+  }, []);
+
   return (
     <>
       <Auth />
+      <p>{connected ? "connecté" : "déconnecté"}</p>
       <CreateNewCar>
         <InputNewCar
           placeholder="Brand"
@@ -156,10 +165,13 @@ const App: FC = () => {
       <div>
         <input
           type="file"
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
-            setUploadingFile(e.target.files[0])
-          }
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            if (e.target.files && e.target.files.length > 0) {
+              setUploadingFile(e.target.files[0]);
+            }
+          }}
         />
+
         <button onClick={uploadFile}>Upload file</button>
       </div>
     </>
